@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+	</head>
+	<body>
+		<div id="frase"></div>
+	</body>
+	<script>
+		function calculaGenero(letra) {
+			if(letra == "a") {
+				return "f";
+			}
+			else if(letra == "e") {
+				return "n";
+			}
+			else {
+				return "m";
+			}
+		}
+	
+		function convertirGenero(sujeto, frase) {
+			var ultFrase = frase[frase.length - 1];
+			
+			// La frase es neutra
+			if(ultFrase == "e")
+				return frase;
+			// Es plural, verifica si es neutra
+			else if(ultFrase == "s") {
+				if(frase[frase.length - 2] == "e")
+					return frase;
+			}
+		
+			// posibles: M, F y NEUTRO (-)
+			var genero = "n";
+
+			var ultimaLetra = sujeto[sujeto.length - 1];
+			var plural = false;
+			
+			// Es plural
+			if(ultimaLetra == "s") {
+				plural = true;
+			
+				// Busca la anteultima letra
+				var anteUltima = sujeto[sujeto.length - 2];
+				genero = calculaGenero(anteUltima);
+			}
+			else {
+				genero = calculaGenero(ultimaLetra);
+			}
+
+			if (genero == "m")
+				frase = frase.substring(0, frase.length - 1) + "o";
+			else if(genero = "f")
+				frase += "a";
+			else
+				frase += "e";
+				
+			if (plural)
+				frase += "s";
+			
+			return frase;
+		}
+			
+		function random() {
+			var lst1 = [
+				{ p: "Turbina", g: "f" }, { p: "Máquina", g: "f" },
+				{ p: "Macho", g: "m" }, { p: "Lider", g: "n" },
+				{ p: "Campeón", g: "m" }, { p: "Lince", g: "m" },
+				{ p: "Tigre", g: "m" }, { p: "Camionero", g: "m" },
+				{ p: "León", g: "m" }, { p: "Semental", g: "m" },
+				{ p: "Aviador", g: "m" }, { p: "Cientifico", g: "m" },
+				{ p: "Astronauta", g: "n" }, { p: "Rufian", g: "m" },
+				{ p: "Caminante", g: "n" }, { p: "Predador", g: "m" },
+				{ p: "Aniquilador", g: "m" }, { p: "Bestia", g: "f" },
+				{ p: "Señor", g: "m" }, { p: "Maestro", g: "m" },
+				{ p: "Jefe", g: "m" }, { p: "Tsunami", g: "m" },
+				{ p: "Terminator", g: "m" }, { p: "Anaconda", g: "f" },
+				{ p: "Torino", g: "m" }, { p: "Rinoceronte", g: "n" },
+				{ p: "Comandante", g: "n" }, { p: "Maquinaria", g: "n" },
+				{ p: "Director", g: "m" }, { p: "Colisionador", g: "m" },
+				{ p: "Espectro", g: "m" }, { p: "Mutante", g: "n" },
+				{ p: "Director", g: "m" }, { p: "Androide", g: "n" },
+				{ p: "Maquinola", g: "f" } 
+			];
+			
+			var lst2 = [
+				{ m: "Albino", f: "Albina" }, { m: "Iberoamericano", f: "Iberoamericana" },
+				{ m: "Nórdico", f: "Nórdica" }, { n: "Mundial" }, 
+				{ n: "Brutal" }, { n: "Sexual" }, 
+				{ m: "Abrupto", f: "Abrupta" }, { m: "Dictador", f: "Dictadora" },
+				{ n: "Alfa" }, { m: "Africano", f: "Africana" },
+				{ m: "Volador", f: "Voladora" }, { m: "Atómico", f: "Atómica" },
+				{ n: "Flameante" }, { n: "Llameante" },
+				{ n: "Universal" }, { m: "Violento", f: "Violenta" },
+				{ n: "Hiperespacial" }, { m: "Mítico", f: "Mítica" },
+				{ m: "Mágico", f: "Mágica" }, { m: "Misterioso", f: "Misteriosa" },
+				{ n: "Espeluznante" }, { m: "Prototípico", f: "Prototípica" },
+				{ m: "Galactico", f: "Galactica" }, { n: "Ornamental" },
+				{ m: "Asesino", f: "Asesina" }, { n: "Cúlmine" },
+				{ m: "Abstraido", f: "Abstraida" }, { m: "Fantasmagórico", f: "Fantasmagórica" },
+				{ n: "Alienígena" }, { n: "Trotamundos" },
+				{ n: "Gigante" }, { m: "Maravilloso", f: "Maravillosa" },
+				{ n: "Nacional" }, { m: "Robótico", f: "Robótica" },
+				{ n: "Celta" }
+			];
+			
+			var lst3 = [
+				{ p: "Conocimiento", g: "m" }, 
+				{ p: "Poder", g: "n" }, 
+				{ p: "La genialidad", g: "n" }, 
+				{ p: "Las praderas", g: "f", plural: true },
+				{ p: "Umbral", g: "n" }, 
+				{ p: "Las galaxias", g: "f", plural: true }, 
+				{ p: "Las naciones", g: "f", plural: true },
+				{ p: "Los átomos", g: "m", plural: true },
+				{ p: "Los mundos", g: "m", plural: true },
+				{ p: "La vida", g: "f" },				
+				{ p: "Los nanotubos", g: "m", plural: true },
+				{ p: "La teoría del caos", g: "n" },
+				{ p: "Concepto freudiano", g: "m" },
+				{ p: "Las sociedades", g: "f", plural: true },
+				{ p: "Las poblaciones", g: "f", plural: true },
+				{ p: "Las paredes", g: "f", plural: true },
+				{ p: "Los ingenieros", g: "m", plural: true },
+				{ p: "Universo", g: "m" },
+				{ p: "Posgrado", g: "m" },
+				{ p: "Las cuevas", g: "f", plural: true },
+				{ p: "Los lagos", g: "m", plural: true },
+				{ p: "La ignición", g: "f" },
+				{ p: "La fusión", g: "f" },
+				{ p: "La fisión", g: "f" },
+				{ p: "Los helechos", g: "m", plural: true },
+				{ p: "Los huevos", g: "m", plural: true },
+				{ p: "Sendero", g: "m" },
+				{ p: "La sustancia", g: "f" },
+				{ p: "La antimateria", g: "f" },
+				{ p: "La alquimia", g: "f" },
+				{ p: "Los gladiadores", g: "m", plural: true },
+				{ p: "Las investiduras", g: "f", plural: true },
+				{ p: "Inconciente", g: "n" },
+				{ p: "Inframundo", g: "m" },
+				{ p: "La ecatombe", g: "f" }
+			];
+			
+			var lst4 = [
+				{ m: "Integrado", f: "Integrada", plural_f: "Integradas", plural_m: "Integrados" },
+				{ m: "Poderoso", f: "Poderosa", plural_f: "Poderosas", plural_m: "Poderosos" },
+				{ m: "Magnifico", f: "Magnifica", plural_f: "Magnificas", plural_m: "Magnificos" },
+				{ n: "Indiscutible", plural_n: "Indiscutibles" },
+				{ m: "Sub-atómico", f: "Sub-atómica", plural_f: "Sub-atómicas", plural_m: "Sub-atómicos" },
+				{ n: "Extraterrestre", plural_n: "Extraterrestres" },
+				{ m: "Darwiniano", plural_m: "Darwinianos", f: "Darwiniana", plural_f: "Darwinianas" },
+				{ m: "Paralelo", f: "Paralela", plural_f: "Paralelas", plural_m: "Paralelos" },
+				{ m: "Lunático", f: "Lunática", plural_f: "Lunáticas", plural_m: "Lunáticos" },
+				{ n: "Antimaterial", plural_n: "Antimateriales" },
+				{ m: "Colectivo", f: "Colectiva", plural_m: "Colectivos", plural_f: "Colectivas" },
+				{ n: "Del skyrim", plural_n: "Del skyrim" },
+				{ n: "Existencial", plural_n: "Existenciales" },
+				{ m: "Extrapolado", f: "Extrapolada", plural_m: "Extrapolados", plural_f: "Extrapoladas" },
+				{ m: "Aumentado", f: "Aumentada", plural_m: "Aumentados", plural_f: "Aumentadas" },
+				{ m: "Infinito", f: "Infinita", plural_m: "Infinitos", plural_f: "Infinitas" },
+				{ n: "Rugiente", plural_n: "Rugientes" },
+				{ n: "Notatorial", plural_n: "Notatoriales" },
+				{ m: "Antagónico", f: "Antagónica", plural_m: "Antagónicos", plural_f: "Antagónicas" },
+				{ m: "Sofisticado", f: "Sofisticada", plural_m: "Sofisticados", plural_f: "Sofisticadas" },
+				{ n: "Flotante", plural_n: "Flotantes" },
+				{ m: "Grandioso", f: "Grandiosa", plural_m: "Grandiosos", plural_f: "Grandiosas" },
+				{ m: "Universitario", f: "Universitaria", plural_m: "Universitarios", plural_f: "Universitarias" },
+				{ m: "Submarino", f: "Submarina", plural_m: "Submarinos", plural_f: "Submarinas" },
+				{ n: "Terrenal", plural_n: "Terrenales" },
+				{ m: "Nanobótico", f: "Nanobótica", plural_m: "Nanobóticos", plural_f: "Nanobóticas" },
+				{ m: "Extinto", f: "Extinta", plural_m: "Extintos", plural_f: "Extintas" },
+				{ m: "Pitónico", f: "Pitónica", plural_m: "Pitónicos", plural_f: "Pitónicas" },
+				{ n: "Funcional", plural_n: "Funcionales" },
+				{ n: "Exponencial", plural_n: "Exponenciales" },
+				{ n: "Omnipresente", plural_n: "Omnipresentes" },
+				{ m: "Inmaculado", f: "Inmaculada", plural_m: "Inmaculados", plural_f: "Inmaculadas" },
+				{ m: "Galardonado", f: "Galardonada", plural_m: "Galardonados", plural_f: "Galardonadas" },
+				{ n: "Estelar", plural_n: "Estelares" },
+				{ n: "Monumental", plural_n: "Monumentales" },
+			];
+		
+			var n1 = lst1[Math.floor(Math.random()*lst1.length)];
+			
+			var lst2Filtered = lst2.filter(function(c) { 
+				return c[n1.g] || c.n;
+			});						
+			var pren2 = lst2Filtered[Math.floor(Math.random()*lst2Filtered.length)];
+			var n2 = (pren2[n1.g] || pren2.n).toLowerCase();
+			
+			var lst3Filtered = lst3.filter(function(c) {
+				return c.g == n1.g || c.g == "n";
+			});			
+			var pren3 = lst3Filtered[Math.floor(Math.random()*lst3Filtered.length)];		
+			var n3 = pren3.p.toLowerCase();
+			
+			var lst4Filtered = lst4.filter(function(c) { 
+				return c[pren3.g] || c.n;
+			});						
+			var pren4 = lst4Filtered[Math.floor(Math.random()*lst4Filtered.length)];
+			
+			var n4 = "";
+			
+			if (pren3.plural)
+				n4 = (pren4["plural_" + pren3.g] || pren4.plural_n).toLowerCase();
+			else
+				n4 = (pren4[pren3.g] || pren4.n).toLowerCase();
+									
+			return n1.p 
+				+ " " 
+				+ n2
+				+ " " 
+				+ (n3.indexOf("la") > -1
+					|| n3.indexOf("el") > -1
+					|| n3.indexOf("los") > -1
+					? "de " : "del ")
+				+ n3
+				+ " " 
+				+ " " 
+				+ n4;
+		}
+	
+		document.getElementById("frase").innerHTML = random();
+	</script>
+</html>
